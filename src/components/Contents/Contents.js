@@ -174,6 +174,15 @@ const MoviesSlider = styled.div`
   padding-bottom: 28px;
   scroll-behavior: smooth;
 
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(${posterFilm.length}, 300px);
+  }
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(${posterFilm.length}, 250px);
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(${posterFilm.length}, 200px);
+  }
   &:hover .movieItem {
     opacity: 0.5;
   }
