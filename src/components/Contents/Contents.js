@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import { SmoothHorizontalScrolling } from "../../utils";
 const posterFilm = [
   "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
   "https://pic5.iqiyipic.com/image/20230727/61/74/a_100537757_m_601_en_260_360.webp",
@@ -8,24 +9,83 @@ const posterFilm = [
   "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
   "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
   "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
+  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
+  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
+  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
 ];
 function Contents(props) {
+  const sliderRef = useRef();
+  const movieRef = useRef();
+  const [dragMove, setdragMove] = useState(0);
+  const [dragDown, setdragDown] = useState(0);
+  const [isDrag, setisDrag] = useState(false);
+
+  useEffect(() => {
+    if (isDrag) {
+      if (dragMove < dragDown) handleScrollRight();
+      if (dragMove > dragDown) handleScrollLeft();
+    }
+  }, [dragDown, dragMove, isDrag]);
+  const onDragStart = (e) => {
+    setisDrag(true);
+    setdragDown(e.screenX);
+  };
+  const onDragEnd = () => {
+    setisDrag(false);
+  };
+  const onDragEnter = (e) => {
+    setdragMove(e.screenX);
+  };
+  const handleScrollRight = () => {
+    const maxScrollLeft =
+      sliderRef.current.scrollWidth - sliderRef.current.clientWidth;
+    if (sliderRef.current.scrollLeft < maxScrollLeft) {
+      SmoothHorizontalScrolling(
+        sliderRef.current,
+        250,
+        movieRef.current.clientWidth * 2,
+        sliderRef.current.scrollLeft
+      );
+    }
+  };
+
+  const handleScrollLeft = () => {
+    if (sliderRef.current.scrollLeft > 0) {
+      SmoothHorizontalScrolling(
+        sliderRef.current,
+        250,
+        -movieRef.current.clientWidth * 2,
+        sliderRef.current.scrollLeft
+      );
+    }
+  };
   return (
     <MoviesRowContainer>
       <h1 className="heading">NetFlix Originals</h1>
-      <MoviesSlider>
+      <MoviesSlider
+        ref={sliderRef}
+        draggable={true}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        onDragEnter={onDragEnter}
+      >
         {" "}
         {posterFilm.map((poster, index) => (
-          <div key={index} className="movieItem">
-            <img src={poster} alt="" />
+          <div
+            key={index}
+            className="movieItem"
+            ref={movieRef}
+            draggable={false}
+          >
+            <img src={poster} alt="" draggable={false} />
             <div className="movieName">Movie Name</div>
           </div>
         ))}
       </MoviesSlider>
-      <div className="btnLeft">
+      <div className="btnLeft" onClick={handleScrollLeft}>
         <FiChevronLeft />
       </div>
-      <div className="btnRight">
+      <div className="btnRight" onClick={handleScrollRight}>
         <FiChevronRight />
       </div>
     </MoviesRowContainer>
