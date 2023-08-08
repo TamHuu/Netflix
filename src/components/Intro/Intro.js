@@ -10,6 +10,7 @@ function Intro(props) {
       <ReactPlayer
         muted={isMuted}
         playing={true}
+        loop={true}
         width="100%"
         height="100%"
         volume={1}
@@ -75,11 +76,11 @@ const IntroContainer = styled.div`
       transition: all 0.3s ease;
 
       @media screen and (max-width: 800px) {
-        left: 45px;
+        font-size: 40px;
       }
 
       @media screen and (max-width: 600px) {
-        left: 24px;
+        font-size: 24px;
       }
     }
     .overviewIntro {
