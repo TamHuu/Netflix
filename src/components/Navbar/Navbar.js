@@ -28,6 +28,7 @@ const Navigation = styled.div`
   top: 0;
   transition-timing-function:ease-in;
   transition: all 1s; 
+  z-index:10;
 
   .navContainer{
     background-color:var(--color-background);
