@@ -5,7 +5,7 @@ import { SmoothHorizontalScrolling } from "../../utils";
 import { useViewport } from "../hooks";
 
 function MoviesRow(props) {
-  const { movies, title, isNetFlix } = props;
+  const { movies, title, isNetFlix, idSection } = props;
 
   const sliderRef = useRef();
   const movieRef = useRef();
@@ -53,7 +53,7 @@ function MoviesRow(props) {
     }
   };
   return (
-    <MoviesRowContainer>
+    <MoviesRowContainer id={idSection}>
       <h1 className="heading">{title}</h1>
       <MoviesSlider
         style={

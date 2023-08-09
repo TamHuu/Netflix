@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { FaHome, FaStar, FaHotjar } from "react-icons/fa";
+import { FaStar, FaHotjar } from "react-icons/fa";
+import { SiNetflix } from "react-icons/si";
 import {
   GiNinjaHeroicStance,
   GiGhost,
@@ -13,14 +14,30 @@ import MenuItemne from "./MenuItem";
 function Menus() {
   return (
     <MenusPane>
-      <MenuItemne name="Home" Icon={FaHome} />
-      <MenuItemne name="Trending" Icon={FaHotjar} />
-      <MenuItemne name="Top rated" Icon={FaStar} />
-      <MenuItemne name="Actions Movies" Icon={GiNinjaHeroicStance} />
-      <MenuItemne name="Comedy Movies" Icon={MdTheaterComedy} />
-      <MenuItemne name="Horror Movies" Icon={GiGhost} />
-      <MenuItemne name="Romance Movies" Icon={GiRomanToga} />
-      <MenuItemne name="Documentaries" Icon={GiBandageRoll} />
+      <MenuItemne name="Netflix" Icon={SiNetflix} to="Netflix" />
+      <MenuItemne name="Trending" Icon={FaHotjar} to="Trending" />
+      <MenuItemne name="Top rated" Icon={FaStar} to="Top rated" />
+      <MenuItemne
+        name="Actions Movies"
+        Icon={GiNinjaHeroicStance}
+        to="Actions Movies"
+      />
+      <MenuItemne
+        name="Comedy Movies"
+        Icon={MdTheaterComedy}
+        to="Comedy Movies"
+      />
+      <MenuItemne name="Horror Movies" Icon={GiGhost} to="Horror Movies" />
+      <MenuItemne
+        name="Romance Movies"
+        Icon={GiRomanToga}
+        to="Romance Movies"
+      />
+      <MenuItemne
+        name="Documentaries"
+        Icon={GiBandageRoll}
+        to="Documentaries"
+      />
     </MenusPane>
   );
 }
@@ -32,7 +49,7 @@ const MenusPane = styled.div`
   top: 20%;
   width:46px;
   padding: 4px 0;
-  background: rgba(220, 220, 220, 0.3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -42,7 +59,7 @@ const MenusPane = styled.div`
 
   &:hover {
     width: 180px;
-    background: rgba(220, 220, 220, 0.5);
+    background: rgba(0, 0, 0, 0.5);
   }
 
 
