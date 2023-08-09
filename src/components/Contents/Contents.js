@@ -1,31 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MoviesRow from "./MoviesRow";
-const posterFilm = [
-  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
-  "https://pic5.iqiyipic.com/image/20230727/61/74/a_100537757_m_601_en_260_360.webp",
-  "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
-  "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
-  "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
-  "https://pic3.iqiyipic.com/image/20201022/51/af/a_100426783_m_601_en_260_360.webp",
-  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
-  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
-  "https://pic9.iqiyipic.com/image/20230724/9d/2c/a_100517780_m_601_en_m3_260_360.webp",
-];
+import { getNetflixOriginals } from "../store/actions";
+
 function Contents() {
+  const dispatch = useDispatch();
+  const { NetflixOriginals } = useSelector((state) => state.infoMovies);
+
+  useEffect(() => {
+    dispatch(getNetflixOriginals());
+  }, [dispatch]);
+  console.log("value nextflix", NetflixOriginals);
   return (
     <div>
       <MoviesRow
-        movies={posterFilm}
+        movies={NetflixOriginals}
         title="NetFlix Originals"
         isNetFlix={true}
       />{" "}
-      <MoviesRow movies={posterFilm} title="Trending Movies" />
-      <MoviesRow movies={posterFilm} title="Top Rated Movies" />
-      <MoviesRow movies={posterFilm} title="Action Movies" />
-      <MoviesRow movies={posterFilm} title="Comedy Movies" />
-      <MoviesRow movies={posterFilm} title="Horror Movies" />
-      <MoviesRow movies={posterFilm} title="Romance Movies" />
-      <MoviesRow movies={posterFilm} title="Documentaries Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Trending Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Top Rated Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Action Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Comedy Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Horror Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Romance Movies" />
+      <MoviesRow movies={NetflixOriginals} title="Documentaries Movies" />
     </div>
   );
 }
