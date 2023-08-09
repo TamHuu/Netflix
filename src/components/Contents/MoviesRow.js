@@ -6,7 +6,7 @@ import { useViewport } from "../hooks";
 
 function MoviesRow(props) {
   const { movies, title, isNetFlix } = props;
-  console.log(">>> CHECK VALUE MOVIE", movies);
+
   const sliderRef = useRef();
   const movieRef = useRef();
   const [dragMove, setdragMove] = useState(0);
