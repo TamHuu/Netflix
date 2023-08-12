@@ -8,6 +8,7 @@ const reducerMoviesinitialState = {
   Horror_Movies: null,
   Romance_Movies: null,
   Documentaries_Movies: null,
+  Movie_Detail: null,
 };
 
 const reducerMovies = (state = reducerMoviesinitialState, action) => {
@@ -37,7 +38,9 @@ const reducerMovies = (state = reducerMoviesinitialState, action) => {
     case Types.GET_Documentaries_Movies:
       console.log("payload GET_Documentaries_Movies", payload);
       return { ...state, Documentaries_Movies: payload };
-
+    case Types.SET_Movies_Detail:
+      console.log("payload SET_Movies_Detail", payload);
+      return { ...state, Movie_Detail: payload };
     default:
       return state;
   }

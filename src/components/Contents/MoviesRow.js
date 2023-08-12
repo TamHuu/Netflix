@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { SmoothHorizontalScrolling } from "../../utils";
 import { useViewport } from "../hooks";
+import { useDispatch } from "react-redux";
+import { setMoviesDetail } from "../store/actions";
+import MoviesDetail from "../MoviesDetail/MoviesDetail";
 
 function MoviesRow(props) {
   const { movies, title, isNetFlix, idSection } = props;
@@ -13,6 +16,11 @@ function MoviesRow(props) {
   const [dragDown, setdragDown] = useState(0);
   const [isDrag, setisDrag] = useState(false);
   const [windowWidth] = useViewport();
+
+  const dispatch = useDispatch();
+  const handleSetMovie = (movie) => {
+    dispatch(setMoviesDetail(movie));
+  };
   useEffect(() => {
     if (isDrag) {
       if (dragMove < dragDown) handleScrollRight();
@@ -88,6 +96,7 @@ function MoviesRow(props) {
                 : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`;
               return (
                 <div
+                  onClick={() => handleSetMovie(movie)}
                   key={index}
                   className="movieItem"
                   ref={movieRef}

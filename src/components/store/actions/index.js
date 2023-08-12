@@ -120,3 +120,10 @@ export const getDocumentariesMovies = () => async (dispatch) => {
     console.log("Get Documentaries Movies Api error:", error);
   }
 };
+// get api Movies Detail
+export const setMoviesDetail = (movie) => async (dispatch) => {
+  dispatch({
+    type: Types.SET_Movies_Detail,
+    payload: movie,
+  });
+};

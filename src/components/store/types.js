@@ -6,3 +6,4 @@ export const GET_Comedy_Movies = "GET_Comedy_Movies";
 export const GET_Horror_Movies = "GET_Horror_Movies ";
 export const GET_Romance_Movies = "GET_Romance_Movies ";
 export const GET_Documentaries_Movies = "GET_Documentaries_Movies ";
+export const SET_Movies_Detail = "SET_Movies_Detail ";
