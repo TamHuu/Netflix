@@ -5,7 +5,6 @@ import { SmoothHorizontalScrolling } from "../../utils";
 import { useViewport } from "../hooks";
 import { useDispatch } from "react-redux";
 import { setMoviesDetail } from "../store/actions";
-import MoviesDetail from "../MoviesDetail/MoviesDetail";
 
 function MoviesRow(props) {
   const { movies, title, isNetFlix, idSection } = props;
@@ -214,12 +213,12 @@ const MoviesSlider = styled.div`
   padding-bottom: 28px;
   scroll-behavior: smooth;
 
-
   &:hover .movieItem {
     opacity: 0.5;
   }
 
   .movieItem {
+    position: relative;
     transform: scale(1);
     max-width: 400px;
     max-height: 500px;
@@ -229,28 +228,27 @@ const MoviesSlider = styled.div`
     user-select: none;
     overflow: hidden;
     border-radius: 6px;
-    transform:center left
-    position: relative;
+    transform: center left;
 
     &:hover {
       transform: scale(1.1);
       z-index: 10;
       opacity: 1;
     }
-    img{
-        width:100%;
-        height:100%;
-        object-fit:cover
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .movieName{
-        position:absolute;
-        left:0;
-        right:0;
-        bottom:0;
-        padding:4px;
-        text-align:center;
-        font-size:14px;
-        background-color:rgba(0,0,0,0.65)
+    .movieName {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 4px;
+      text-align: center;
+      font-size: 14px;
+      background-color: rgba(0, 0, 0, 0.65);
     }
   }
 `;

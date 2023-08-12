@@ -151,7 +151,7 @@ const MoviesDetailModal = styled.div`
       .movieInfo {
         width: 65%;
         height: 100%;
-        padding-tp: 30px;
+        padding-top: 30px;
 
         @media screen and (max-width: 600px) {
           font-size: 16px;
