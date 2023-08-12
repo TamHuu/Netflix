@@ -120,10 +120,26 @@ export const getDocumentariesMovies = () => async (dispatch) => {
     console.log("Get Documentaries Movies Api error:", error);
   }
 };
+
 // get api Movies Detail
 export const setMoviesDetail = (movie) => async (dispatch) => {
   dispatch({
     type: Types.SET_Movies_Detail,
     payload: movie,
   });
+};
+
+// get api search movie
+export const getSearchMovies = (keywords) => async (dispatch) => {
+  try {
+    const result = await axios.get(
+      `${BASE_URL}/search/multi?api_key=${API_KEY}&language=en-US&include_adult=false&query=${keywords}`
+    );
+    dispatch({
+      type: Types.GET_SEARCH_MOVIES,
+      payload: result.data.results,
+    });
+  } catch (error) {
+    console.log("Get getSearchMovies Api error:", error);
+  }
 };

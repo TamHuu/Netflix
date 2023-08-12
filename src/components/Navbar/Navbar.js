@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import img from "../../asset/img/logo.png";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { useScrollY } from "../hooks";
+import { useNavigate } from "react-router-dom";
 
 function Navbar(props) {
   const [scrollY] = useScrollY();
+  const [keywords, setKeywords] = useState("");
+  const navigate = useNavigate();
+  const handleChangeInput = (e) => {
+    let keywords = e.target.value;
+    setKeywords(keywords);
+    keywords.length > 0
+      ? navigate(`/search?keywords=${keywords.trim()}`)
+      : navigate("/");
+  };
+
+  const goHome = () => {
+    navigate("/");
+    setKeywords("");
+  };
   return (
     <Navigation
       style={
@@ -15,13 +30,18 @@ function Navbar(props) {
       }
     >
       <div className="navContainer">
-        <div className="logo">
+        <div className="logo" onClick={goHome}>
           <img src={img} alt="thumb" />
         </div>
 
         <div className="navSearch">
           <MdSearch className="iconSearch" />
-          <input type="text" placeholder="search film or actors" />
+          <input
+            value={keywords}
+            type="text"
+            placeholder="search film or actors"
+            onChange={handleChangeInput}
+          />
         </div>
       </div>
     </Navigation>

@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useViewport } from "../hooks";
-const moviesList = [
-  "https://image.tmdb.org/t/p/original//lgyFuoXs7GvKJN0mNm7z7OMOFuZ.jpg",
-  "https://image.tmdb.org/t/p/original//lgyFuoXs7GvKJN0mNm7z7OMOFuZ.jpg",
-  "https://image.tmdb.org/t/p/original//lgyFuoXs7GvKJN0mNm7z7OMOFuZ.jpg",
-  "https://image.tmdb.org/t/p/original//lgyFuoXs7GvKJN0mNm7z7OMOFuZ.jpg",
-];
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearchMovies } from "../store/actions";
+
+const useQuery = () => new URLSearchParams(useLocation().search);
 function SearchMovies(props) {
   const [windowWidth] = useViewport();
+  const dispatch = useDispatch();
+  const { Search_Movie } = useSelector((state) => state.infoMovies);
+  const keywords = useQuery().get("keywords");
+  console.log(">> search vaolue", Search_Movie);
+  useEffect(() => {
+    if (keywords) dispatch(getSearchMovies(keywords));
+  }, [keywords, dispatch]);
   return (
     <SearchPane>
-      {moviesList && moviesList.length > 0 ? (
+      {Search_Movie && Search_Movie.length > 0 ? (
         <div
           className="searchContent"
           style={{
@@ -28,12 +34,20 @@ function SearchMovies(props) {
             },auto)`,
           }}
         >
-          {moviesList.map((movie, index) => (
-            <div className="movieItem" key={index}>
-              <img src={movie} alt="film" />
-              <span className="name_film">Movie Name</span>
-            </div>
-          ))}
+          {Search_Movie.map((movie, index) => {
+            if (movie.backdrop_path !== null && movie.media_type !== "person") {
+              const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`;
+              return (
+                <div className="movieItem" key={index}>
+                  <img src={imageUrl} alt="film" />
+                  <span className="name_film">
+                    {" "}
+                    {movie.title || movie.name}
+                  </span>
+                </div>
+              );
+            }
+          })}
         </div>
       ) : (
         <NotFound>
